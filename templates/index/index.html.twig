@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Начало работы{% endblock %}
-
 {% block body %}
 <div class="container-fluid text-center mt-5">
-    <h2>НАЧАЛО РАБОТЫ</h2>
-    <a href="{{ "/login" }}" class="btn btn-primary btn-lg active">ВОЙТИ В СИСТЕМУ</a>
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% else %}
+        <h2>НАЧАЛО РАБОТЫ</h2>
+        <a href="{{ "/login" }}" class="btn btn-primary btn-lg active">ВОЙТИ В СИСТЕМУ</a>
+    {% endif %}
 </div>
 {% endblock %}
