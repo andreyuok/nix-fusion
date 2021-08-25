@@ -1,2 +1,2 @@
-# VET Manager
+# OpenVET CRM
 Documentation will be added soon...
