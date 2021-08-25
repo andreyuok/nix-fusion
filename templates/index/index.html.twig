@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Начало работы{% endblock %}
+{% block title %}VET MANAGER{% endblock %}
 {% block body %}
 <div class="container-fluid text-center mt-5">
     {% if app.user %}
@@ -7,8 +7,10 @@
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% else %}
-        <h2>НАЧАЛО РАБОТЫ</h2>
-        <a href="{{ "/login" }}" class="btn btn-primary btn-lg active">ВОЙТИ В СИСТЕМУ</a>
+        <h2>VET MANAGER</h2>
+        <span>версия: development-preview. #build 00.0.1</span>
+            <br />
+        <a href="{{ "/login" }}" class="btn btn-primary btn-lg active mt-5">ВОЙТИ В СИСТЕМУ</a>
     {% endif %}
 </div>
 {% endblock %}
