@@ -1,2 +1,2 @@
-# crm
-crm
+# OpenVET CRM
+Documentation will be added soon...
