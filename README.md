@@ -1,2 +1,2 @@
-# OpenVET CRM
+# Nix Fusion CRM
 Documentation will be added soon...
