@@ -5,13 +5,15 @@
 
 <body>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3 p-0">
-    {% include "system/sidebar.html.twig" %}
+    <div class="row justify-content-md-center">
+        <div class="col-md-3 p-0 bar-wrap">
+            {% include "system/sidebar.html.twig" %}
         </div>
         <div class="col-md-9">
-        {% block body %}
-        {% endblock %}
+            <div class="content">
+                {% block body %}
+                {% endblock %}
+            </div>
         </div>
     </div>
 </div>
