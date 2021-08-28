@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Добавление нового питомца{% endblock %}
+
+{% block body %}
+    <h1>Добавление нового питомца</h1>
+
+    {{ include('pets/_form.html.twig') }}
+
+    <a href="{{ path('pets_index') }}">back to list</a>
+{% endblock %}

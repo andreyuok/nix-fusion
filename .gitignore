@@ -1,3 +1,6 @@
+/.idea
+/node_modules
+/public/.DS_Store
 # Cache and logs (Symfony2)
 /app/cache/*
 /app/logs/*
@@ -51,5 +54,4 @@
 # Embedded web-server pid file
 /.web-server-pid
 /.DS_Store
-.idea
-.idea/crm.local.iml
+

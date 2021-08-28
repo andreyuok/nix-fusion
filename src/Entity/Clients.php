@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClientsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,16 @@ class Clients
      * @ORM\Column(type="datetime_immutable")
      */
     private $created_at;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Pets::class, mappedBy="client_id_relation")
+     */
+    private $client_id;
+
+    public function __construct()
+    {
+        $this->client_id = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +115,36 @@ class Clients
     public function setCreatedAt(\DateTimeImmutable $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pets[]
+     */
+    public function getClientId(): Collection
+    {
+        return $this->client_id;
+    }
+
+    public function addClientId(Pets $clientId): self
+    {
+        if (!$this->client_id->contains($clientId)) {
+            $this->client_id[] = $clientId;
+            $clientId->setClientIdRelation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClientId(Pets $clientId): self
+    {
+        if ($this->client_id->removeElement($clientId)) {
+            // set the owning side to null (unless already changed)
+            if ($clientId->getClientIdRelation() === $this) {
+                $clientId->setClientIdRelation(null);
+            }
+        }
 
         return $this;
     }

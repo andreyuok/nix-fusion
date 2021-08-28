@@ -2,11 +2,16 @@
     position: absolute;
     height: 100%;
 }
+
 .bar-wrap {
     max-width: 280px !important;
 }
 
-.content{
-    max-width: 900px;
+.content {
     width: 100%;
+    margin: 0 auto;
+}
+
+.column-date {
+    max-width: 100px;
 }

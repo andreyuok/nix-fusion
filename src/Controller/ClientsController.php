@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Clients;
-use DateTime;
+use App\Form\AddClientType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,34 +17,40 @@ class ClientsController extends AbstractController
      */
     public function index(): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        $allClients = $entityManager->getRepository('App:Clients')->findAll();
+
         return $this->render('clients/index.html.twig', [
             'controller_name' => 'ClientsController',
+            'clients' => $allClients,
         ]);
     }
 
     /**
      * @Route("/add_client", name="add_client")
      */
-    public function addClient(): Response
+    public function addClient(Request $request): Response
     {
-        // you can fetch the EntityManager via $this->getDoctrine()
-        // or you can add an argument to the action: createProduct(EntityManagerInterface $entityManager)
-        $entityManager = $this->getDoctrine()->getManager();
-        $now = new \DateTimeImmutable();
-
         $client = new Clients();
-        $client->setEmail('testclient@example.com');
-        $client->setFirstname('Jhon');
-        $client->setLastname('Doe');
-        $client->setPhone('+380636171184');
-        $client->setCreatedAt($now);
+        $client->setCreatedAt(new \DateTimeImmutable());
 
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($client);
+        $form = $this->createForm(AddClientType::class, $client);
 
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        return new Response('Saved new product with id '.$client->getId());
+            $client = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($client);
+            $entityManager->flush();
+            $this->addFlash('success', 'Новый клиент сохранен');
+
+            return $this->redirectToRoute('add_client');
+        }
+
+        return $this->render('clients/addnew.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

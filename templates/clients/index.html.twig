@@ -4,35 +4,44 @@
 
 {% block body %}
 
-    <h1 class="mx-auto text-center text-uppercase">Клиенты</h1>
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-        </tr>
-        </tbody>
-    </table>
+    <h1 class="mx-auto text-center text-uppercase mt-5 mb-2">Клиенты</h1>
+    <div class="alert alert-light font-weight-light" role="alert">
+        Здесь находится база ваших клиентов которыми вы можете управлять.
+    </div>
+    <div class="grid-wrap">
+        <div class="d-flex justify-content-end mb-3 action-bar">
+            <a href="{{ path('add_client') }}" class="btn btn-primary btn-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi me-3 bi-person-bounding-box" viewBox="0 0 16 16">
+                    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                </svg>
+                Добавить клиента
+            </a>
+        </div>
+        <table class="table table-bordered">
+            <thead class="bg-dark text-white text-uppercase text-center">
+            <tr>
+                <th scope="col" class="column-id">#</th>
+                <th scope="col" class="column-id">E-mail</th>
+                <th scope="col" class="column-firstname">Имя</th>
+                <th scope="col" class="column-lastname">Фамилия</th>
+                <th scope="col" class="column-phone">Телефон</th>
+                <th scope="col" class="column-date">Дата регистрации</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for c in clients %}
+                <tr class="text-center">
+                    <td>{{ c.id }}</td>
+                    <td>{{ c.email }}</td>
+                    <td>{{ c.firstname }}</td>
+                    <td>{{ c.lastname }}</td>
+                    <td>{{ c.phone }}</td>
+                    <td>{{ c.createdAt | date('d-m-Y') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

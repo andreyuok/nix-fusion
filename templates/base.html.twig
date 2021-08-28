@@ -5,12 +5,17 @@
 
 <body>
 <div class="container-fluid">
-    <div class="row justify-content-md-center">
+    <div class="row g-0">
         <div class="col-md-3 p-0 bar-wrap">
             {% include "system/sidebar.html.twig" %}
         </div>
         <div class="col-md-9">
-            <div class="content">
+            <div class="content bg-light.bg-gradient">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success mt-3 mb-3">
+                        {{ message }}
+                    </div>
+                {% endfor %}
                 {% block body %}
                 {% endblock %}
             </div>
