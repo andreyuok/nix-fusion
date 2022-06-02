@@ -28,6 +28,7 @@
                 <th scope="col" class="column-lastname">Фамилия</th>
                 <th scope="col" class="column-phone">Телефон</th>
                 <th scope="col" class="column-date">Дата регистрации</th>
+                <th scope="col" class="column-date">Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -39,6 +40,10 @@
                     <td>{{ c.lastname }}</td>
                     <td>{{ c.phone }}</td>
                     <td>{{ c.createdAt | date('d-m-Y') }}</td>
+                    <td>
+                        <a href="{{ path('clients_crud_show', {'id': c.id}) }}">Показать</a>
+                        <a href="{{ path('clients_crud_edit', {'id': c.id}) }}">Редактировать</a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

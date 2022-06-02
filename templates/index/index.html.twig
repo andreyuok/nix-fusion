@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block title %}Nix Fusion{% endblock %}
 {% block body %}
-<div class="container-fluid text-center mt-5">
+<div class="container-fluid text-center">
     {% if app.user %}
         <div class="mb-3">
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+        <h1 class="mx-auto xtext-right text-uppercase mt-3 mb-1">Главная</h1>
+        <div class="alert alert-light font-weight-light" role="alert">
+            Здесь будет находится сводная информация
         </div>
     {% else %}
         <h2>Nix CRM</h2>
